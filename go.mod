@@ -1,4 +1,4 @@
-module fyne.io/fyne/v2
+module github.com/bounce-chat/fyne
 
 go 1.19
 
