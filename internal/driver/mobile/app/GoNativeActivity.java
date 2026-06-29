@@ -794,6 +794,26 @@ public class GoNativeActivity extends NativeActivity implements LifecycleOwner {
         }
 
         lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
+
+	view.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
+            @Override
+            public WindowInsets onApplyWindowInsets(View view, WindowInsets insets) {
+                android.graphics.Insets keyboardInsets = insets.getInsets(WindowInsets.Type.ime());
+                android.graphics.Insets systemBarsInsets = insets.getInsets(WindowInsets.Type.systemBars());
+
+                int keyboardHeight = keyboardInsets.bottom;
+                int systemBarsHeight = systemBarsInsets.bottom;
+
+                if (keyboardHeight > 0) {
+                    view.setPadding(0, 0, 0, keyboardHeight);
+                } else {
+                    view.setPadding(0, 0, 0, systemBarsHeight);
+                }
+
+                return insets;
+            }
+        });
+
     }
 
     private void setupEntry() {
