@@ -251,7 +251,7 @@ func (d *driver) Run() {
 
 					if insetChange {
 						newSize := fyne.Size{
-							Width:  (e.WidthPt*e.PixelsPerPt - theme.Size(theme.SizeNameInnerPadding)*2) / c.scale,
+							Width:  ((e.WidthPt * e.PixelsPerPt) - float32(e.InsetLeftPx+e.InsetRightPx) - theme.Size(theme.SizeNameInnerPadding)*2) / c.scale,
 							Height: ((e.HeightPt * e.PixelsPerPt) - float32(e.InsetTopPx+e.InsetBottomPx) - theme.Size(theme.SizeNameInnerPadding)*2) / c.scale,
 						}
 						if current.Content() != nil {
