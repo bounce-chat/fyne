@@ -52,6 +52,7 @@ void startCameraPreview(JNIEnv* env);
 void stopCameraPreview(JNIEnv* env);
 void finish(JNIEnv* env, jobject ctx);
 
+void Java_org_golang_app_GoNativeActivity_openDisplayString(JNIEnv *env, jclass clazz, jstring str);
 void Java_org_golang_app_GoNativeActivity_filePickerReturned(JNIEnv *env, jclass clazz, jstring str);
 void Java_org_golang_app_GoNativeActivity_capturePhotoReturned(JNIEnv *env, jclass clazz, jbyteArray jpegBytes, jint length);
 */
@@ -347,6 +348,17 @@ func hideSoftInput(vm, jniEnv, ctx uintptr) error {
 	return nil
 }
 
+var displayCallback func(string)
+
+//export openDisplayString
+func openDisplayString(str *C.char) {
+	if displayCallback == nil {
+		return
+	}
+
+	displayCallback(C.GoString(str))
+}
+
 var fileCallback func(string, func())
 
 //export filePickerReturned
@@ -446,6 +458,10 @@ func driverShowFileOpenPicker(callback func(string, func()), filter *FileFilter)
 	if err := mobileinit.RunOnJVM(open); err != nil {
 		log.Fatalf("app: %v", err)
 	}
+}
+
+func NativeSetNotificationCallback(callback func(string)) {
+	displayCallback = callback
 }
 
 func driverShowFileSavePicker(callback func(string, func()), filter *FileFilter, filename string) {

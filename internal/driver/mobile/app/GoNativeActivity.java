@@ -81,6 +81,7 @@ public class GoNativeActivity extends NativeActivity implements LifecycleOwner {
     private static final int PASSWORD_KEYBOARD_CODE = 3;
 
     private native void filePickerReturned(String str);
+    private native void openDisplayString(String str);
     private native void capturePhotoReturned(byte[] jpegBytes, int length);
     private native void cameraPreviewFrame(byte[] jpegBytes, int length);
     private native void insetsChanged(int top, int bottom, int left, int right);
@@ -853,6 +854,17 @@ public class GoNativeActivity extends NativeActivity implements LifecycleOwner {
 
         Uri uri = data.getData();
         filePickerReturned(uri.toString());
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+
+        String display = intent.getStringExtra("display");
+	if (display != null) {
+	  openDisplayString(display);
+	}
     }
 
     @Override

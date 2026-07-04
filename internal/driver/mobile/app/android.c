@@ -314,6 +314,11 @@ void stopCameraPreview(JNIEnv* env) {
 	);
 }
 
+void Java_org_golang_app_GoNativeActivity_openDisplayString(JNIEnv *env, jclass clazz, jstring str) {
+    const char* cstr = (*env)->GetStringUTFChars(env, str, JNI_FALSE);
+	openDisplayString((char*)cstr);
+}
+
 void Java_org_golang_app_GoNativeActivity_filePickerReturned(JNIEnv *env, jclass clazz, jstring str) {
     const char* cstr = (*env)->GetStringUTFChars(env, str, JNI_FALSE);
 	filePickerReturned((char*)cstr);
