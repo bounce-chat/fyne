@@ -815,6 +815,13 @@ public class GoNativeActivity extends NativeActivity implements LifecycleOwner {
             }
         });
 
+        Intent intent = getIntent();
+        if (intent != null) {
+            String display = intent.getStringExtra("display");
+            if (display != null) {
+                openDisplayString(display);
+            }
+        }
     }
 
     private void setupEntry() {
@@ -863,7 +870,7 @@ public class GoNativeActivity extends NativeActivity implements LifecycleOwner {
 
         String display = intent.getStringExtra("display");
 	if (display != null) {
-	  openDisplayString(display);
+	    openDisplayString(display);
 	}
     }
 
