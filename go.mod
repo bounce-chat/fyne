@@ -1,6 +1,6 @@
 module fyne.io/fyne/v2
 
-go 1.19
+go 1.24.2
 
 require (
 	fyne.io/systray v1.12.2
@@ -55,6 +55,7 @@ require (
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/srwiley/oksvg v0.0.0-20221011165216-be6e8873101c // indirect
+	github.com/svanichkin/gocam v0.1.0 // indirect
 	golang.org/x/net v0.35.0 // indirect
 	golang.org/x/sync v0.11.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20200227125254-8fa46927fb4f // indirect
