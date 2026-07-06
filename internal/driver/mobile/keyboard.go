@@ -22,14 +22,23 @@ func (d *device) handleKeyboard(obj fyne.Focusable) {
 	if disWid, ok := obj.(fyne.Disableable); ok {
 		isDisabled = disWid.Disabled()
 	}
-	if obj != nil && !isDisabled {
+	if obj == nil {
+		return
+	}
+	if !isDisabled {
 		if keyb, ok := obj.(mobile.Keyboardable); ok {
 			d.showVirtualKeyboard(keyb.Keyboard())
 		} else {
 			d.showVirtualKeyboard(mobile.DefaultKeyboard)
 		}
 	} else {
-		d.hideVirtualKeyboard()
+		if kp, ok := obj.(fyne.KeyboardPreservable); ok {
+			if !kp.DoNotHideKeyboardWhenFocusing() {
+				d.hideVirtualKeyboard()
+			}
+		} else {
+			d.hideVirtualKeyboard()
+		}
 	}
 }
 

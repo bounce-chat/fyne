@@ -243,6 +243,11 @@ func (c *canvas) tapDown(pos fyne.Position, tapID int) {
 	}
 
 	if layer != 1 { // 0 - overlay, 1 - window head / menu, 2 - content
+		if wid, ok := co.(fyne.KeyboardPreservable); ok {
+			if wid.DoNotHideKeyboardWhenLosingFocus() {
+				return
+			}
+		}
 		if wid, ok := co.(fyne.Focusable); !ok || wid != c.Focused() {
 			c.Unfocus()
 		}
