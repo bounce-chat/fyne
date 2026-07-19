@@ -1,6 +1,6 @@
 module fyne.io/fyne/v2
 
-go 1.22.0
+go 1.24.2
 
 require (
 	fyne.io/systray v1.12.2
@@ -32,6 +32,7 @@ require (
 	github.com/rymdport/portal v0.4.2
 	github.com/srwiley/rasterx v0.0.0-20220730225603-2ab79fcdd4ef
 	github.com/stretchr/testify v1.11.1
+	github.com/svanichkin/gocam v0.1.0
 	github.com/urfave/cli/v2 v2.27.7
 	github.com/yuin/goldmark v1.8.2
 	golang.org/x/image v0.24.0

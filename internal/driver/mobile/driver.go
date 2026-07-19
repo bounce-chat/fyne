@@ -250,6 +250,14 @@ func (d *driver) Run() {
 					c.Painter().SetFrameBufferScale(1.0)
 
 					if insetChange {
+						newSize := fyne.Size{
+							Width:  ((e.WidthPt * e.PixelsPerPt) - float32(e.InsetLeftPx+e.InsetRightPx) - theme.Size(theme.SizeNameInnerPadding)*2) / c.scale,
+							Height: ((e.HeightPt * e.PixelsPerPt) - float32(e.InsetTopPx+e.InsetBottomPx) - theme.Size(theme.SizeNameInnerPadding)*2) / c.scale,
+						}
+						if current.Content() != nil {
+							current.Content().Resize(newSize)
+						}
+						c.Refresh(current.Content())
 						current.canvas.sizeContent(current.canvas.size) // even if size didn't change we invalidate
 					}
 					// make sure that we paint on the next frame

@@ -44,6 +44,11 @@ type Disableable interface {
 	Disabled() bool
 }
 
+type KeyboardPreservable interface {
+	DoNotHideKeyboardWhenFocusing() bool
+	DoNotHideKeyboardWhenLosingFocus() bool
+}
+
 // DoubleTappable describes any [CanvasObject] that can also be double tapped.
 type DoubleTappable interface {
 	DoubleTapped(*PointEvent)
